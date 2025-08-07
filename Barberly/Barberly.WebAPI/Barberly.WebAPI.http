@@ -1,0 +1,6 @@
+@Barberly.WebAPI_HostAddress = http://localhost:5093
+
+GET {{Barberly.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

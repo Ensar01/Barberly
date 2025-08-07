@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Barberly.Database\Barberly.Database.csproj" />
+    <ProjectReference Include="..\Barberly.Interfaces\Barberly.Interfaces.csproj" />
+    <ProjectReference Include="..\Barberly.Model\Barberly.Model.csproj" />
+  </ItemGroup>
+
+</Project>
