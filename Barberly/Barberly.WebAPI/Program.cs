@@ -1,3 +1,6 @@
+using Barberly.Database;
+using Microsoft.EntityFrameworkCore;
+using System.Data.SqlTypes;
 
 namespace Barberly.WebAPI
 {
@@ -12,6 +15,9 @@ namespace Barberly.WebAPI
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddDbContext<DBContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                sqlOptions=> sqlOptions.MigrationsAssembly("Barberly.Database")));
 
             var app = builder.Build();
 
