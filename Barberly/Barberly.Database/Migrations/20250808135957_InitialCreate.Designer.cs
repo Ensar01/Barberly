@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Barberly.Database.Migrations
 {
-    [DbContext(typeof(DBContext))]
+    [DbContext(typeof(DbContext))]
     [Migration("20250808135957_InitialCreate")]
     partial class InitialCreate
     {
