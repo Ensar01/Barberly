@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Data.SqlTypes;
+using Mapster;
+using Barberly.Interfaces;
+using Barberly.Services;
+
 
 namespace Barberly.WebAPI
 {
@@ -19,7 +23,10 @@ namespace Barberly.WebAPI
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
-            builder.Services.AddDbContext<Database.DbContext>(options =>
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddMapster();
+            builder.Services.AddDbContext<Database.BarberlyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
                 sqlOptions=> sqlOptions.MigrationsAssembly("Barberly.Database")));
             builder.Services.AddIdentity<User, IdentityRole>(options =>
@@ -29,7 +36,7 @@ namespace Barberly.WebAPI
                 options.Password.RequireDigit = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 8;
-            }).AddEntityFrameworkStores<Database.DbContext>();
+            }).AddEntityFrameworkStores<Database.BarberlyDbContext>();
 
             builder.Services.AddAuthentication(options =>
             {
@@ -55,12 +62,17 @@ namespace Barberly.WebAPI
                 };
             });
 
+            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
+             
             }
 
             app.UseCors(

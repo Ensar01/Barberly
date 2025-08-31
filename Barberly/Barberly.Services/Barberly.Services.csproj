@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Barberly.Database\Barberly.Database.csproj" />
     <ProjectReference Include="..\Barberly.Interfaces\Barberly.Interfaces.csproj" />
     <ProjectReference Include="..\Barberly.Model\Barberly.Model.csproj" />

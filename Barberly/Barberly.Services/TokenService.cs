@@ -11,11 +11,11 @@ namespace Barberly.Services
 {
     public class TokenService : ITokenService
     {
-        private readonly DbContext _context;
+        private readonly BarberlyDbContext _context;
         private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
 
-        public TokenService(DbContext context,IConfiguration config, SymmetricSecurityKey key)
+        public TokenService(BarberlyDbContext context,IConfiguration config)
         {
             _context = context;
             _config = config;
@@ -30,7 +30,7 @@ namespace Barberly.Services
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Username)
             };
             claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role)));
-            var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

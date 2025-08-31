@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Barberly.Database
 {
-    public class DbContext : IdentityDbContext<User>
+    public class BarberlyDbContext : IdentityDbContext<User>
     {
-        public DbContext(DbContextOptions<DbContext> options)
+        public BarberlyDbContext(DbContextOptions<BarberlyDbContext> options)
             : base(options)
         {
         }
